@@ -1,209 +1,167 @@
 {
-  "log": {
-    "access": "",
-    "error": "",
-    "loglevel": "debug"
-  },
-  "inbounds": [
-    {
-      "tag": "socks",
-      "port": 20808,
-      "listen": "127.0.0.1",
-      "protocol": "socks",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-        "routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
+    "log": {
+        "loglevel": "warning"
     },
-    {
-      "tag": "http",
-      "port": 20809,
-      "listen": "127.0.0.1",
-      "protocol": "http",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-        "routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    },
-    {
-      "tag": "socks2",
-      "port": 20810,
-      "listen": "0.0.0.0",
-      "protocol": "socks",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-        "routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    },
-    {
-      "tag": "http2",
-      "port": 20811,
-      "listen": "0.0.0.0",
-      "protocol": "http",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-        "routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    },
-    {
-      "tag": "api",
-      "port": 20813,
-      "listen": "127.0.0.1",
-      "protocol": "dokodemo-door",
-      "settings": {
-        "udp": false,
-        "address": "127.0.0.1",
-        "allowTransparent": false
-      }
-    }
-  ],
-  "outbounds": [
-    {
-      "tag": "proxy",
-      "protocol": "vless",
-      "settings": {
-        "vnext": [
-          {
-            "address": "64.64.228.144",
-            "port": 443,
-            "users": [
-              {
-                "id": "6018a759-20db-48e0-a7c1-535b9222a442",
-                "alterId": 0,
-                "email": "t@t.tt",
-                "security": "auto",
-                "encryption": "none",
-                "flow": "xtls-rprx-vision"
-              }
-            ]
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "tcp",
-        "security": "reality",
-        "realitySettings": {
-          "serverName": "www.microsoft.com",
-          "fingerprint": "random",
-          "show": false,
-          "publicKey": "Rr8dp0mJlPmhwtndOU4uJ4XKHcBDts6cl-rUC58zaiE",
-          "shortId": "a3f9df45ae15d6c2",
-          "spiderX": "/xuaj"
+    "inbounds": [
+        {
+            "port": 20809,
+            "listen": "127.0.0.1",
+            "protocol": "http",
+            "settings": {}
         }
-      },
-      "mux": {
-        "enabled": false,
-        "concurrency": -1,
-        "xudpConcurrency": 16,
-        "xudpProxyUDP443": "reject"
-      }
-    },
-    {
-      "tag": "direct",
-      "protocol": "freedom",
-      "settings": {}
-    },
-    {
-      "tag": "block",
-      "protocol": "blackhole",
-      "settings": {
-        "response": {
-          "type": "http"
+    ],
+    "outbounds": [
+        {
+            "tag": "vless1",
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "149.28.82.125",
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "6018a759-20db-48e0-a7c1-535b9222a442",
+                                "encryption": "none",
+                                "flow": "xtls-rprx-vision"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "reality",
+                "realitySettings": {
+                    "show": false,
+                    "serverName": "www.microsoft.com",
+                    "publicKey": "Rr8dp0mJlPmhwtndOU4uJ4XKHcBDts6cl-rUC58zaiE",
+                    "shortId": "a3f9df45ae15d6c2",
+                    "spiderX": "/xuaj",
+                    "fingerprint": "random"
+                }
+            }
+        },
+        {
+            "tag": "vless2",
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "2.2.2.2",
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "6018a759-20db-48e0-a7c1-535b9222a442",
+                                "encryption": "none",
+                                "flow": "xtls-rprx-vision"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "reality",
+                "realitySettings": {
+                    "show": false,
+                    "serverName": "www.microsoft.com",
+                    "publicKey": "Rr8dp0mJlPmhwtndOU4uJ4XKHcBDts6cl-rUC58zaiE",
+                    "shortId": "a3f9df45ae15d6c2",
+                    "spiderX": "/xuaj",
+                    "fingerprint": "random"
+                }
+            }
+        },
+        {
+            "tag": "vless3",
+            "protocol": "vless",
+            "settings": {
+                "vnext": [
+                    {
+                        "address": "64.64.228.144",
+                        "port": 443,
+                        "users": [
+                            {
+                                "id": "6018a759-20db-48e0-a7c1-535b9222a442",
+                                "encryption": "none",
+                                "flow": "xtls-rprx-vision"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "reality",
+                "realitySettings": {
+                    "show": false,
+                    "serverName": "www.microsoft.com",
+                    "publicKey": "Rr8dp0mJlPmhwtndOU4uJ4XKHcBDts6cl-rUC58zaiE",
+                    "shortId": "a3f9df45ae15d6c2",
+                    "spiderX": "/xuaj",
+                    "fingerprint": "random"
+                }
+            }
+        },
+        {
+            "tag": "direct",
+            "protocol": "freedom",
+            "settings": {}
         }
-      }
-    }
-  ],
-  "stats": {},
-  "api": {
-    "tag": "api",
-    "services": [
-      "StatsService"
-    ]
-  },
-  "policy": {
-    "system": {
-      "statsOutboundUplink": true,
-      "statsOutboundDownlink": true
-    }
-  },
-  "dns": {
-    "hosts": {
-      "dns.google": "8.8.8.8",
-      "proxy.example.com": "127.0.0.1"
-    },
-    "servers": [
-      {
-        "address": "223.5.5.5",
-        "domains": [
-          "geosite:cn",
-          "geosite:geolocation-cn"
-        ],
-        "expectIPs": [
-          "geoip:cn"
+    ],
+    "balancers": [
+        {
+            "tag": "vless_lb",
+            "selector": [
+                "vless1",
+                "vless2",
+                "vless3"
+            ],
+            "strategy": "leastPing"
+        }
+    ],
+    "routing": {
+        "domainStrategy": "UseIP",
+        "rules": [
+            {
+                "type": "field",
+                "domain": [
+                    ".4096bbs.club",
+                    ".40img.click"
+                ],
+                "balancer": "vless_lb"
+            },
+            {
+                "type": "field",
+                "inboundTag": [
+                    "dns_proxy"
+                ],
+                "domain": [
+                    ".4096bbs.club",
+                    ".40img.click"
+                ],
+                "balancer": "vless_lb"
+            },
+            {
+                "type": "field",
+                "outboundTag": "direct",
+                "network": "tcp,udp"
+            }
         ]
-      },
-      "1.1.1.1",
-      "8.8.8.8",
-      "https://dns.google/dns-query"
-    ]
-  },
-  "routing": {
-    "domainStrategy": "AsIs",
-    "rules": [
-      {
-        "type": "field",
-        "inboundTag": [
-          "api"
+    },
+    "dns": {
+        "servers": [
+            {
+                "address": "8.8.8.8",
+                "domains": [
+                    ".4096bbs.club",
+                    ".40img.click"
+                ],
+                "tag": "dns_proxy"
+            },
+            "localhost"
         ],
-        "outboundTag": "api"
-      },
-      {
-        "type": "field",
-        "port": "443",
-        "network": "udp",
-        "outboundTag": "block"
-      },
-      {
-        "type": "field",
-        "port": "0-65535",
-        "outboundTag": "proxy"
-      }
-    ]
-  }
+        "queryStrategy": "UseIPv4"
+    }
 }
