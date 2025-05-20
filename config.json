@@ -1,9 +1,4 @@
 {
-  "log": {
-    "access": "",
-    "error": "",
-    "loglevel": "debug"
-  },
   "inbounds": [
     {
       "tag": "socks",
@@ -95,7 +90,12 @@
   ],
   "outbounds": [
     {
-      "tag": "proxy",
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "proxy1",
       "protocol": "vless",
       "settings": {
         "vnext": [
@@ -135,9 +135,44 @@
       }
     },
     {
-      "tag": "direct",
-      "protocol": "freedom",
-      "settings": {}
+      "tag": "proxy2",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "149.28.82.125",
+            "port": 443,
+            "users": [
+              {
+                "id": "6018a759-20db-48e0-a7c1-535b9222a442",
+                "alterId": 0,
+                "email": "t@t.tt",
+                "security": "auto",
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "www.microsoft.com",
+          "fingerprint": "random",
+          "show": false,
+          "publicKey": "Rr8dp0mJlPmhwtndOU4uJ4XKHcBDts6cl-rUC58zaiE",
+          "shortId": "a3f9df45ae15d6c2",
+          "spiderX": "/xuaj"
+        }
+      },
+      "mux": {
+        "enabled": false,
+        "concurrency": -1,
+        "xudpConcurrency": 16,
+        "xudpProxyUDP443": "reject"
+      }
     },
     {
       "tag": "block",
@@ -188,6 +223,15 @@
     "rules": [
       {
         "type": "field",
+        "balancerTag": "balancer",
+        "domain": [
+          "domain:google.com",
+          "domain:x.com",
+          "domain:t66y.com"
+        ]
+      },
+      {
+        "type": "field",
         "inboundTag": [
           "api"
         ],
@@ -203,6 +247,18 @@
         "type": "field",
         "port": "0-65535",
         "outboundTag": "proxy"
+      }
+    ],
+    "balancers": [
+      {
+        "tag": "balancer",
+        "selector": [
+          "proxy1",
+          "proxy2"
+        ],
+        "strategy": {
+          "type": "random"
+        }
       }
     ]
   }
