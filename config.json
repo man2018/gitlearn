@@ -1,66 +1,14 @@
 {
+  "log": {
+    "loglevel": "debug",
+    "access": "",
+    "error": ""
+  },
   "inbounds": [
-    {
-      "tag": "socks",
-      "port": 20808,
-      "listen": "127.0.0.1",
-      "protocol": "socks",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-        "routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    },
     {
       "tag": "http",
       "port": 20809,
       "listen": "127.0.0.1",
-      "protocol": "http",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-        "routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    },
-    {
-      "tag": "socks2",
-      "port": 20810,
-      "listen": "0.0.0.0",
-      "protocol": "socks",
-      "sniffing": {
-        "enabled": true,
-        "destOverride": [
-          "http",
-          "tls"
-        ],
-        "routeOnly": false
-      },
-      "settings": {
-        "auth": "noauth",
-        "udp": true,
-        "allowTransparent": false
-      }
-    },
-    {
-      "tag": "http2",
-      "port": 20811,
-      "listen": "0.0.0.0",
       "protocol": "http",
       "sniffing": {
         "enabled": true,
@@ -100,13 +48,13 @@
       "settings": {
         "vnext": [
           {
-            "address": "64.64.228.144",
+            "address": "96.30.196.71",
             "port": 443,
             "users": [
               {
-                "id": "6018a759-20db-48e0-a7c1-535b9222a442",
+                "id": "b86b4ca5-8429-4e9c-8100-af7b38c57fb5",
                 "alterId": 0,
-                "email": "t@t.tt",
+                "email": "5ysibi5j",
                 "security": "auto",
                 "encryption": "none",
                 "flow": "xtls-rprx-vision"
@@ -122,9 +70,9 @@
           "serverName": "www.microsoft.com",
           "fingerprint": "random",
           "show": false,
-          "publicKey": "Rr8dp0mJlPmhwtndOU4uJ4XKHcBDts6cl-rUC58zaiE",
-          "shortId": "a3f9df45ae15d6c2",
-          "spiderX": "/xuaj"
+          "publicKey": "MUORcBJ7-_HPGevIqqDpERj4cB4--wpeVcuEi7is1xk",
+          "shortId": "3a918d7b96857462",
+          "spiderX": "/luqbaz"
         }
       },
       "mux": {
@@ -140,13 +88,13 @@
       "settings": {
         "vnext": [
           {
-            "address": "149.28.82.125",
+            "address": "66.42.80.60",
             "port": 443,
             "users": [
               {
-                "id": "6018a759-20db-48e0-a7c1-535b9222a442",
+                "id": "b86b4ca5-8429-4e9c-8100-af7b38c57fb5",
                 "alterId": 0,
-                "email": "t@t.tt",
+                "email": "5ysibi5j",
                 "security": "auto",
                 "encryption": "none",
                 "flow": "xtls-rprx-vision"
@@ -162,9 +110,9 @@
           "serverName": "www.microsoft.com",
           "fingerprint": "random",
           "show": false,
-          "publicKey": "Rr8dp0mJlPmhwtndOU4uJ4XKHcBDts6cl-rUC58zaiE",
-          "shortId": "a3f9df45ae15d6c2",
-          "spiderX": "/xuaj"
+          "publicKey": "MUORcBJ7-_HPGevIqqDpERj4cB4--wpeVcuEi7is1xk",
+          "shortId": "3a918d7b96857462",
+          "spiderX": "/luqbaz"
         }
       },
       "mux": {
@@ -172,15 +120,6 @@
         "concurrency": -1,
         "xudpConcurrency": 16,
         "xudpProxyUDP443": "reject"
-      }
-    },
-    {
-      "tag": "block",
-      "protocol": "blackhole",
-      "settings": {
-        "response": {
-          "type": "http"
-        }
       }
     }
   ],
@@ -199,8 +138,8 @@
   },
   "dns": {
     "hosts": {
-      "dns.google": "8.8.8.8",
-      "proxy.example.com": "127.0.0.1"
+      "dns.google": "8.8.8.8" //,
+      //"proxy.example.com": "127.0.0.1"
     },
     "servers": [
       {
@@ -215,17 +154,34 @@
       },
       "1.1.1.1",
       "8.8.8.8",
+      "8.8.4.4",
       "https://dns.google/dns-query"
-    ]
+    ],
+    "queryStrategy": "UseIP"
   },
   "routing": {
     "domainStrategy": "AsIs",
     "rules": [
       {
         "type": "field",
+        "ip": [
+          "1.1.1.1",
+          "8.8.8.8",
+          "8.8.4.4"
+        ],
+        "balancerTag": "balancer"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "dns.google"
+        ],
+        "balancerTag": "balancer"
+      },
+      {
+        "type": "field",
         "balancerTag": "balancer",
         "domain": [
-          "domain:google.com",
           "domain:x.com",
           "domain:t66y.com"
         ]
@@ -236,17 +192,6 @@
           "api"
         ],
         "outboundTag": "api"
-      },
-      {
-        "type": "field",
-        "port": "443",
-        "network": "udp",
-        "outboundTag": "block"
-      },
-      {
-        "type": "field",
-        "port": "0-65535",
-        "outboundTag": "proxy"
       }
     ],
     "balancers": [
