@@ -181,6 +181,7 @@
         "type": "field",
         "balancerTag": "balancer",
         "domain": [
+          "domain:ip111.cn",
           "domain:x.com",
           "domain:t66y.com",
           "112200ccq.xyz",
