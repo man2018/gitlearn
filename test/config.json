@@ -1,0 +1,230 @@
+{
+  "log": {
+    "loglevel": "debug",
+    "access": "",
+    "error": ""
+  },
+  "inbounds": [
+    {
+      "tag": "http",
+      "port": 20808,
+      "listen": "127.0.0.1",
+      "protocol": "http",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+        "routeOnly": false
+      },
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "allowTransparent": false
+      }
+    },
+    {
+      "tag": "api",
+      "port": 20813,
+      "listen": "127.0.0.1",
+      "protocol": "dokodemo-door",
+      "settings": {
+        "udp": false,
+        "address": "127.0.0.1",
+        "allowTransparent": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "direct",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "proxy1",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "3.3.3.3",
+            "port": 443,
+            "users": [
+              {
+                "id": "b86b4ca5-8429-4e9c-8100-af7b38c57fb5",
+                "alterId": 0,
+                "email": "5ysibi5j",
+                "security": "auto",
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "www.microsoft.com",
+          "fingerprint": "random",
+          "show": false,
+          "publicKey": "MUORcBJ7-_HPGevIqqDpERj4cB4--wpeVcuEi7is1xk",
+          "shortId": "3a918d7b96857462",
+          "spiderX": "/luqbaz"
+        }
+      },
+      "mux": {
+        "enabled": false,
+        "concurrency": -1,
+        "xudpConcurrency": 16,
+        "xudpProxyUDP443": "reject"
+      }
+    },
+    {
+      "tag": "proxy2",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "44.44.44.44",
+            "port": 443,
+            "users": [
+              {
+                "id": "b86b4ca5-8429-4e9c-8100-af7b38c57fb5",
+                "alterId": 0,
+                "email": "5ysibi5j",
+                "security": "auto",
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "serverName": "www.microsoft.com",
+          "fingerprint": "random",
+          "show": false,
+          "publicKey": "MUORcBJ7-_HPGevIqqDpERj4cB4--wpeVcuEi7is1xk",
+          "shortId": "3a918d7b96857462",
+          "spiderX": "/luqbaz"
+        }
+      },
+      "mux": {
+        "enabled": false,
+        "concurrency": -1,
+        "xudpConcurrency": 16,
+        "xudpProxyUDP443": "reject"
+      }
+    }
+  ],
+  "stats": {},
+  "api": {
+    "tag": "api",
+    "services": [
+      "StatsService"
+    ]
+  },
+  "policy": {
+    "system": {
+      "statsOutboundUplink": true,
+      "statsOutboundDownlink": true
+    }
+  },
+  "dns": {
+    "hosts": {
+      "dns.google": "8.8.8.8"
+    },
+    "servers": [
+      {
+        "address": "223.5.5.5",
+        "domains": [
+          "geosite:cn",
+          "geosite:geolocation-cn"
+        ],
+        "expectIPs": [
+          "geoip:cn"
+        ]
+      },
+      "1.1.1.1",
+      "8.8.8.8",
+      "8.8.4.4",
+      "https://dns.google/dns-query"
+    ],
+    "queryStrategy": "UseIP"
+  },
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "1.1.1.1",
+          "8.8.8.8",
+          "8.8.4.4"
+        ],
+        "balancerTag": "balancer"
+      },
+      {
+        "type": "field",
+        "domain": [
+          "dns.google"
+        ],
+        "balancerTag": "balancer"
+      },
+      {
+        "type": "field",
+        "balancerTag": "balancer",
+        "domain": [
+          "domain:ip111.cn",
+          "domain:x.com",
+          "domain:t66y.com",
+          "112200ccq.xyz",
+          "4096bbs.club",
+          "4096bbs.com",
+          "40dz1.site",
+          "40img.click",
+          "a11b23381cc.xyz",
+          "akba.live",
+          "c12o2z69.click",
+          "c8103010.xyz",
+          "d12o2z69.click",
+          "e12o2z69.click",
+          "h65d.xyz",
+          "h66d.xyz",
+          "huijia1.mom",
+          "poqiang.site",
+          "sp1205.click",
+          "xindizhi1.site",
+          "xp40d1.pro",
+          "xq40d1.site",
+          "zz11b23381cc.xyz"
+        ]
+      },
+      {
+        "type": "field",
+        "inboundTag": [
+          "api"
+        ],
+        "outboundTag": "api"
+      }
+    ],
+    "balancers": [
+      {
+        "tag": "balancer",
+        "selector": [
+          "proxy1",
+          "proxy2"
+        ],
+        "strategy": {
+          "type": "random"
+        }
+      }
+    ]
+  }
+}
