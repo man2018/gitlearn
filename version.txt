@@ -1,2 +1,2 @@
-config=20250527
-latest=20250528
+config=v0.2
+latest=v0.2
