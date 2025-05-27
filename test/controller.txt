@@ -1,2 +1,2 @@
-https://raw.githubusercontent.com/man2018/gitlearn/refs/heads/main/test/latest.html
 https://raw.githubusercontent.com/man2018/gitlearn/refs/heads/main/test/config.json
+https://raw.githubusercontent.com/man2018/gitlearn/refs/heads/main/test/latest.html
