@@ -181,9 +181,9 @@
         "type": "field",
         "balancerTag": "balancer",
         "domain": [
-          "domain:ip111.cn",
-          "domain:x.com",
-          "domain:t66y.com",
+          "ip111.cn",
+          "x.com",
+          "t66y.com",
           "112200ccq.xyz",
           "4096bbs.club",
           "4096bbs.com",
